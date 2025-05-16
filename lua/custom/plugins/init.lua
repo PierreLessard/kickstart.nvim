@@ -60,4 +60,22 @@ return {
       }
     end,
   },
+  {
+    'akinsho/bufferline.nvim',
+    version = '*',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    config = function()
+      require('bufferline').setup {
+        options = {
+          mode = 'buffers',
+          separator_style = 'slant', -- try "padded_slant", "thick", "thin"
+          diagnostics = 'nvim_lsp',
+          show_buffer_close_icons = true,
+          show_close_icon = false,
+          enforce_regular_tabs = true,
+          always_show_bufferline = true,
+        },
+      }
+    end,
+  },
 }

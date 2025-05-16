@@ -114,9 +114,9 @@ vim.opt.showmode = false
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
-vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
-end)
+-- vim.schedule(function()
+--   vim.opt.clipboard = 'unnamedplus'
+-- end)
 
 -- Enable break indent
 vim.opt.breakindent = true
@@ -182,6 +182,10 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Custom Keymaps
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true }) -- gotta love this one
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true }) -- tree
+vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { desc = 'Prev buffer' })
+vim.keymap.set('n', '<leader>w', ':bdelete<CR>', { desc = 'Close buffer' })
+vim.opt.termguicolors = true
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -431,6 +435,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>fs', builtin.find_files, { desc = 'Find files (alt)' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -1016,3 +1021,10 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
+-- custom gruvbox tab stuff
+vim.api.nvim_set_hl(0, 'BufferLineFill', { bg = '#1d2021' })
+vim.api.nvim_set_hl(0, 'BufferLineSeparator', { fg = '#1d2021', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', { fg = '#1d2021', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible', { fg = '#1d2021', bg = 'NONE' })
+vim.api.nvim_set_hl(0, 'BufferLineBufferSelected', { fg = '#ebdbb2', bg = '#3c3836', bold = true })
+vim.api.nvim_set_hl(0, 'BufferLineBackground', { fg = '#928374', bg = '#3c3836' }) -- same bg as Fill
