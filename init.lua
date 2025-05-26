@@ -185,7 +185,10 @@ vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = tru
 vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { desc = 'Prev buffer' })
 vim.keymap.set('n', '<leader>w', ':bdelete<CR>', { desc = 'Close buffer' })
-vim.opt.termguicolors = true
+vim.keymap.set('n', '<leader>tb', function()
+  require('gitsigns').toggle_current_line_blame()
+end, { desc = 'Toggle git blame' })
+vim.keymap.set('n', '<leader>rr', '<cmd>source $MYVIMRC<CR>', { desc = 'Reload config' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
@@ -1036,6 +1039,4 @@ vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', { fg = '#1d2021', bg = 'NO
 vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible', { fg = '#1d2021', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'BufferLineBufferSelected', { fg = '#ebdbb2', bg = '#3c3836', bold = true })
 vim.api.nvim_set_hl(0, 'BufferLineBackground', { fg = '#928374', bg = '#3c3836' }) -- same bg as Fill
-vim.keymap.set('n', 'gb', function() --  toggles git blame for current line
-  require('gitsigns').toggle_current_line_blame()
-end, { desc = 'Toggle git blame' })
+vim.opt.termguicolors = true
