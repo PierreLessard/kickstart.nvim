@@ -419,7 +419,7 @@ require('lazy').setup({
               ['<CR>'] = function(prompt_bufnr)
                 local selection = require('telescope.actions.state').get_selected_entry()
                 require('telescope.actions').close(prompt_bufnr)
-                vim.cmd('tabnew ' .. selection.path) -- Open the selected file in a new tab
+                vim.cmd('edit' .. selection.path) -- Open the selected file in a new tab
               end,
             },
           },
