@@ -1036,3 +1036,6 @@ vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', { fg = '#1d2021', bg = 'NO
 vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible', { fg = '#1d2021', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'BufferLineBufferSelected', { fg = '#ebdbb2', bg = '#3c3836', bold = true })
 vim.api.nvim_set_hl(0, 'BufferLineBackground', { fg = '#928374', bg = '#3c3836' }) -- same bg as Fill
+vim.keymap.set('n', 'gb', function() --  toggles git blame for current line
+  require('gitsigns').toggle_current_line_blame()
+end, { desc = 'Toggle git blame' })
