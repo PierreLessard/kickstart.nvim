@@ -84,4 +84,15 @@ return {
       current_line_blame = false,
     },
   },
+  {
+    'dstein64/nvim-scrollview',
+    opts = {
+      signs_on_startup = { 'diagnostics' },
+    },
+  },
+  {
+    'folke/persistence.nvim',
+    event = 'BufReadPre',
+    opts = {},
+  },
 }

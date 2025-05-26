@@ -188,7 +188,9 @@ vim.keymap.set('n', '<leader>w', ':bdelete<CR>', { desc = 'Close buffer' })
 vim.keymap.set('n', '<leader>tb', function()
   require('gitsigns').toggle_current_line_blame()
 end, { desc = 'Toggle git blame' })
-vim.keymap.set('n', '<leader>rr', '<cmd>source $MYVIMRC<CR>', { desc = 'Reload config' })
+vim.keymap.set('n', '<leader>rs', function()
+  require('persistence').load()
+end, { desc = 'Restore session' })
 
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
