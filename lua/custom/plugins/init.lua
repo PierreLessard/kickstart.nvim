@@ -85,10 +85,14 @@ return {
     },
   },
   {
-    'dstein64/nvim-scrollview',
-    opts = {
-      signs_on_startup = { 'diagnostics' },
-    },
+    'petertriho/nvim-scrollbar',
+    config = function()
+      require('scrollbar').setup()
+
+      -- Optional handlers
+      require('scrollbar.handlers.gitsigns').setup()
+      require('scrollbar.handlers.diagnostic').setup()
+    end,
   },
   {
     'folke/persistence.nvim',
