@@ -382,9 +382,6 @@ require('lazy').setup({
         end,
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
-
-      -- Useful for getting pretty icons, but requires a Nerd Font.
-      { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
@@ -1014,21 +1011,8 @@ require('lazy').setup({
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = vim.g.have_nerd_font and {} or {
-      cmd = '⌘',
-      config = '🛠',
-      event = '📅',
-      ft = '📂',
-      init = '⚙',
-      keys = '🗝',
-      plugin = '🔌',
-      runtime = '💻',
-      require = '🌙',
-      source = '📄',
-      start = '🚀',
-      task = '📌',
-      lazy = '💤 ',
-    },
+    icons = {}
+    ,
   },
 })
 
@@ -1039,6 +1023,5 @@ vim.api.nvim_set_hl(0, 'BufferLineFill', { bg = '#1d2021' })
 vim.api.nvim_set_hl(0, 'BufferLineSeparator', { fg = '#1d2021', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', { fg = '#1d2021', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible', { fg = '#1d2021', bg = 'NONE' })
-vim.api.nvim_set_hl(0, 'BufferLineBufferSelected', { fg = '#ebdbb2', bg = '#3c3836', bold = true })
 vim.api.nvim_set_hl(0, 'BufferLineBackground', { fg = '#928374', bg = '#3c3836' }) -- same bg as Fill
 vim.opt.termguicolors = true

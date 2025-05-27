@@ -36,9 +36,6 @@ return {
   },
   {
     'nvim-tree/nvim-tree.lua',
-    requires = {
-      'nvim-tree/nvim-web-devicons', -- optional, for file icons
-    },
     config = function()
       require('nvim-tree').setup {
         on_attach = my_on_attach,
@@ -61,19 +58,37 @@ return {
     end,
   },
   {
+    'nvim-tree/nvim-web-devicons',
+    lazy = false, -- install & load immediately
+    enabled = true,
+  },
+  {
     'akinsho/bufferline.nvim',
     version = '*',
-    dependencies = 'nvim-tree/nvim-web-devicons',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
     config = function()
       require('bufferline').setup {
         options = {
           mode = 'buffers',
-          separator_style = 'slant', -- try "padded_slant", "thick", "thin"
+          separator_style = 'thick', -- try "padded_slant", "thick", "thin"
+          truncate_names = true,
+          left_trunc_marker = '--',
+          right_trunc_marker = '--',
+          indicator = {
+            style = 'underline',
+          },
           diagnostics = 'nvim_lsp',
-          show_buffer_close_icons = true,
+          show_buffer_close_icons = false,
           show_close_icon = false,
-          enforce_regular_tabs = true,
           always_show_bufferline = true,
+          diagnostics_indicator = function(count, level, diagnostics_dict, _context)
+            local s = ' '
+            for e, n in pairs(diagnostics_dict) do
+              local sym = e == 'error' and ' ' or (e == 'warning' and ' ' or (e == 'info' and ' ' or ' '))
+              s = s .. sym .. n
+            end
+            return s
+          end,
         },
       }
     end,
