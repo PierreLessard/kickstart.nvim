@@ -181,7 +181,21 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 
 -- Custom Keymaps
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true }) -- gotta love this one
-vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeToggle<CR>', { noremap = true, silent = true }) -- tree
+
+-- NvimTree binds
+vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<leader>ft', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
+vim.keymap.set('n', '<leader>fn', function()
+  require("nvim-tree.api").fs.create()
+end, { desc = "NvimTree Create File" })
+vim.keymap.set('n', '<leader>fd', function()
+  require("nvim-tree.api").fs.remove()
+end, { desc = "NvimTree Delete File" })
+vim.keymap.set('n', '<leader>fr', function()
+  require("nvim-tree.api").fs.rename()
+end, { desc = "NvimTree Rename File" })
+
+-- Buffer binds
 vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<S-Tab>', ':BufferLineCyclePrev<CR>', { desc = 'Prev buffer' })
 vim.keymap.set('n', '<leader>w', ':bdelete<CR>', { desc = 'Close buffer' })
@@ -410,17 +424,19 @@ require('lazy').setup({
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         -- pickers = {}
-        defaults = {
-          mappings = {
-            i = {
-              ['<CR>'] = function(prompt_bufnr)
-                local selection = require('telescope.actions.state').get_selected_entry()
-                require('telescope.actions').close(prompt_bufnr)
-                vim.cmd('edit' .. selection.path) -- Open the selected file in a new tab
-              end,
-            },
-          },
-        },
+        -- defaults = {
+        --   mappings = {
+        --     i = {
+        --       ['<CR>'] = function(prompt_bufnr)
+        --         local selection = require('telescope.actions.state').get_selected_entry()
+        --         require('telescope.actions').close(prompt_bufnr)
+        --         local uri = selection.value.text.action.command.arguments[1].documentChanges[1].textDocument.uri
+        --         local filepath = vim.uri_to_fname(uri)
+        --         vim.cmd('edit ' .. filepath) -- Open the selected file in a new tab
+        --       end,
+        --     },
+        --   },
+        -- },
         extensions = {
           ['ui-select'] = {
             require('telescope.themes').get_dropdown(),
@@ -789,7 +805,7 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        -- javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { "prettierd", "prettier", stop_after_first = true },
       },
     },
   },
@@ -852,7 +868,7 @@ require('lazy').setup({
         -- <c-k>: Toggle signature help
         --
         -- See :h blink-cmp-config-keymap for defining your own keymap
-        preset = 'super-tab',
+        preset = 'default',
 
         -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -1025,3 +1041,12 @@ vim.api.nvim_set_hl(0, 'BufferLineSeparatorSelected', { fg = '#1d2021', bg = 'NO
 vim.api.nvim_set_hl(0, 'BufferLineSeparatorVisible', { fg = '#1d2021', bg = 'NONE' })
 vim.api.nvim_set_hl(0, 'BufferLineBackground', { fg = '#928374', bg = '#3c3836' }) -- same bg as Fill
 vim.opt.termguicolors = true
+
+-- stop the pesky extra commenting thing
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "*",
+  callback = function()
+    vim.opt.formatoptions:remove({ "c", "r", "o" })
+  end,
+})
+
