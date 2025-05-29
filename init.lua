@@ -186,14 +186,14 @@ vim.keymap.set('i', 'jk', '<Esc>', { noremap = true }) -- gotta love this one
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ft', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
 vim.keymap.set('n', '<leader>fn', function()
-  require("nvim-tree.api").fs.create()
-end, { desc = "NvimTree Create File" })
+  require('nvim-tree.api').fs.create()
+end, { desc = 'NvimTree Create File' })
 vim.keymap.set('n', '<leader>fd', function()
-  require("nvim-tree.api").fs.remove()
-end, { desc = "NvimTree Delete File" })
+  require('nvim-tree.api').fs.remove()
+end, { desc = 'NvimTree Delete File' })
 vim.keymap.set('n', '<leader>fr', function()
-  require("nvim-tree.api").fs.rename()
-end, { desc = "NvimTree Rename File" })
+  require('nvim-tree.api').fs.rename()
+end, { desc = 'NvimTree Rename File' })
 
 -- Buffer binds
 vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
@@ -708,6 +708,7 @@ require('lazy').setup({
         -- But for many setups, the LSP (`ts_ls`) will work just fine
         -- ts_ls = {},
         --
+        eslint = {},
         ts_ls = {},
         lua_ls = {
           -- cmd = { ... },
@@ -805,7 +806,7 @@ require('lazy').setup({
         -- python = { "isort", "black" },
         --
         -- You can use 'stop_after_first' to run the first available formatter from the list
-        javascript = { "prettierd", "prettier", stop_after_first = true },
+        javascript = { 'prettierd', 'prettier', stop_after_first = true },
       },
     },
   },
@@ -1027,11 +1028,11 @@ require('lazy').setup({
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
-    icons = {}
-    ,
+    icons = {},
   },
 })
 
+-- RANDOM BS
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
 -- custom gruvbox tab stuff
@@ -1043,10 +1044,9 @@ vim.api.nvim_set_hl(0, 'BufferLineBackground', { fg = '#928374', bg = '#3c3836' 
 vim.opt.termguicolors = true
 
 -- stop the pesky extra commenting thing
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "*",
+vim.api.nvim_create_autocmd('FileType', {
+  pattern = '*',
   callback = function()
-    vim.opt.formatoptions:remove({ "c", "r", "o" })
+    vim.opt.formatoptions:remove { 'c', 'r', 'o' }
   end,
 })
-
