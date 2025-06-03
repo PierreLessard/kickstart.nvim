@@ -195,13 +195,23 @@ vim.keymap.set('n', '<leader>fr', function()
   require('nvim-tree.api').fs.rename()
 end, { desc = 'NvimTree Rename File' })
 vim.keymap.set('n', '<leader>fD', function()
-  require('nvim-tree.api').fs.create({ dir = true })
+  require('nvim-tree.api').fs.create()
 end, { desc = 'NvimTree Create Directory' })
 
 -- Floating window
 vim.keymap.set('n', 'gh', function() -- close by going off of line and back on
   vim.diagnostic.open_float(nil, { focus = true })
 end, { desc = 'Show full diagnostic message' })
+vim.keymap.set('n', 'gH', function()
+  local diagnostics = vim.diagnostic.get(0, { lnum = vim.api.nvim_win_get_cursor(0)[1] - 1 })
+  if #diagnostics > 0 then
+    local msg = diagnostics[1].message
+    vim.fn.setreg('+', msg)
+    print('Diagnostic copied to clipboard')
+  else
+    print('No diagnostic message at cursor')
+  end
+end, { desc = 'Copy diagnostic message to clipboard' })
 
 -- Buffer binds
 vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
