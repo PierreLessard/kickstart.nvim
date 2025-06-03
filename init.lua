@@ -194,9 +194,6 @@ end, { desc = 'NvimTree Delete File' })
 vim.keymap.set('n', '<leader>fr', function()
   require('nvim-tree.api').fs.rename()
 end, { desc = 'NvimTree Rename File' })
-vim.keymap.set('n', '<leader>fD', function()
-  require('nvim-tree.api').fs.create()
-end, { desc = 'NvimTree Create Directory' })
 
 -- Floating window
 vim.keymap.set('n', 'gh', function() -- close by going off of line and back on
@@ -728,6 +725,7 @@ require('lazy').setup({
         --
         eslint = {},
         ts_ls = {},
+        jdtls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
