@@ -126,6 +126,19 @@ return {
     end,
   },
   {
-    'mfussenegger/nvim-jdtls'
+    'mfussenegger/nvim-jdtls',
+  },
+  {
+    'windwp/nvim-autopairs',
+    event = 'InsertEnter',
+    opts = {},
+  },
+  {
+    'windwp/nvim-ts-autotag',
+    ft = { 'javascriptreact', 'typescriptreact', 'html' },
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+    config = function()
+      require('nvim-ts-autotag').setup()
+    end,
   },
 }
