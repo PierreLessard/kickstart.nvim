@@ -194,6 +194,14 @@ end, { desc = 'NvimTree Delete File' })
 vim.keymap.set('n', '<leader>fr', function()
   require('nvim-tree.api').fs.rename()
 end, { desc = 'NvimTree Rename File' })
+vim.keymap.set('n', '<leader>fD', function()
+  require('nvim-tree.api').fs.create({ dir = true })
+end, { desc = 'NvimTree Create Directory' })
+
+-- Floating window
+vim.keymap.set('n', 'gh', function() -- close by going off of line and back on
+  vim.diagnostic.open_float(nil, { focus = true })
+end, { desc = 'Show full diagnostic message' })
 
 -- Buffer binds
 vim.keymap.set('n', '<Tab>', ':BufferLineCycleNext<CR>', { desc = 'Next buffer' })
@@ -978,7 +986,7 @@ require('lazy').setup({
     main = 'nvim-treesitter.configs', -- Sets main module to use for opts
     -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
     opts = {
-      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc' },
+      ensure_installed = { 'bash', 'c', 'diff', 'html', 'lua', 'luadoc', 'markdown', 'markdown_inline', 'query', 'vim', 'vimdoc', 'java' },
       -- Autoinstall languages that are not installed
       auto_install = true,
       highlight = {

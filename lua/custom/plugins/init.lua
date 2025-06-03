@@ -125,4 +125,7 @@ return {
       require('diffview').setup {}
     end,
   },
+  {
+    'mfussenegger/nvim-jdtls'
+  },
 }
