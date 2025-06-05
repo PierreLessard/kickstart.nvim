@@ -11,7 +11,7 @@ local function my_on_attach(bufnr)
   api.config.mappings.default_on_attach(bufnr)
 
   -- Custom mappings
-  vim.keymap.set('n', '<CR>', api.node.open.tab_drop, opts 'Open: New Tab')
+  vim.keymap.set('n', '<CR>', api.node.open.edit, opts 'Open: Edit (buffer)')
 
   -- Example: You can remove or change default mappings
   -- vim.keymap.del('n', '<BS>', opts('Close Directory'))
@@ -39,7 +39,15 @@ return {
     config = function()
       require('nvim-tree').setup {
         on_attach = my_on_attach,
-        -- Optional customizations here
+        actions = {
+          open_file = {
+            quit_on_open = true, -- optional: closes tree after opening
+            resize_window = true,
+            window_picker = {
+              enable = false,
+            },
+          },
+        },
         view = {
           width = 30, -- Set the width of the file tree
           side = 'right', -- Position the file tree on the left
@@ -140,5 +148,18 @@ return {
     config = function()
       require('nvim-ts-autotag').setup()
     end,
+  },
+  {
+    'kawre/leetcode.nvim',
+    build = ':TSUpdate html', -- if you have `nvim-treesitter` installed
+    dependencies = {
+      'nvim-telescope/telescope.nvim',
+      -- "ibhagwan/fzf-lua",
+      'nvim-lua/plenary.nvim',
+      'MunifTanjim/nui.nvim',
+    },
+    opts = {
+      -- configuration goes here
+    },
   },
 }
