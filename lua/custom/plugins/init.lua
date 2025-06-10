@@ -134,9 +134,6 @@ return {
     end,
   },
   {
-    'mfussenegger/nvim-jdtls',
-  },
-  {
     'windwp/nvim-autopairs',
     event = 'InsertEnter',
     opts = {},
@@ -151,7 +148,6 @@ return {
   },
   {
     'kawre/leetcode.nvim',
-    build = ':TSUpdate html', -- if you have `nvim-treesitter` installed
     dependencies = {
       'nvim-telescope/telescope.nvim',
       -- "ibhagwan/fzf-lua",
@@ -159,7 +155,10 @@ return {
       'MunifTanjim/nui.nvim',
     },
     opts = {
-      -- configuration goes here
+      lang = 'python3',
+      description = {
+        position = 'right',
+      },
     },
   },
 }
