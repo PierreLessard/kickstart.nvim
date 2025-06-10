@@ -733,9 +733,9 @@ require('lazy').setup({
         --
         eslint = {},
         ts_ls = {},
-        jdtls = {},
         pyright = {},
         lemminx = {},
+        jdtls = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
