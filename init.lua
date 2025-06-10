@@ -182,6 +182,14 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 -- Custom Keymaps
 vim.keymap.set('i', 'jk', '<Esc>', { noremap = true }) -- gotta love this one
 
+-- Stay in visual mode while indenting
+vim.keymap.set("v", "<", "<gv", { desc = "Indent left and stay in visual mode" })
+vim.keymap.set("v", ">", ">gv", { desc = "Indent right and stay in visual mode" })
+
+-- Move selected lines while staying in visual mode
+vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selected lines down" })
+vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selected lines up" })
+
 -- NvimTree binds
 vim.api.nvim_set_keymap('n', '<leader>e', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<leader>ft', ':NvimTreeFindFileToggle<CR>', { noremap = true, silent = true })
@@ -726,6 +734,7 @@ require('lazy').setup({
         eslint = {},
         ts_ls = {},
         jdtls = {},
+        pyright = {},
         lua_ls = {
           -- cmd = { ... },
           -- filetypes = { ... },
