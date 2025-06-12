@@ -51,9 +51,6 @@ local config = {
           enabled = 'all', -- literals, all, none
         },
       },
-      format = {
-        enabled = false,
-      },
     },
   },
 
